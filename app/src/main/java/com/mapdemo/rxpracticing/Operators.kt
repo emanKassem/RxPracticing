@@ -3,7 +3,6 @@ package com.mapdemo.rxpracticing
 import android.util.Log
 import io.reactivex.rxjava3.core.*
 import io.reactivex.rxjava3.disposables.Disposable
-import io.reactivex.rxjava3.functions.BiFunction
 import io.reactivex.rxjava3.observables.GroupedObservable
 import java.lang.Exception
 import java.util.concurrent.TimeUnit

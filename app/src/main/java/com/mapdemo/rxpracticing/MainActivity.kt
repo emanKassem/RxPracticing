@@ -12,29 +12,52 @@ class MainActivity : AppCompatActivity() {
     {
         val TAG = "MainActivity"
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val observable = Observable.just(1, 2, 3, 4,5 )
-        val observer = object : Observer<Int>{
-            override fun onSubscribe(d: Disposable?) {
-                Log.d(TAG, "onSubscribe: ")
-            }
+        /*groupByOperator().subscribe(
+                {group->
+                    group.subscribe{
+                        Log.d(TAG, "OnNext: Group${group.key}: Value: $it")
+                    }
+                },
+                {
+                    Log.d(TAG, "OnError: $it")
+                },
+                {
+                    Log.d(TAG, "OnComplete")
+                }
+        )*/
 
-            override fun onNext(t: Int?) {
-                Log.d(TAG, "onNext: $t")
-            }
+        /*groupByOperator()
+                .flatMapSingle {group->
+                    group.toList()
+                }.subscribe(
+                        {
+                            Log.d(TAG, "OnNext: $it")
+                        },
+                        {
+                            Log.d(TAG, "OnError: $it")
+                        },
+                        {
+                            Log.d(TAG, "OnComplete")
+                        }
+                )
+*/
+        zipOperator()
+                .subscribe(
+                        {
+                            Log.d(TAG, "OnNext: $it")
+                        },
+                        {
+                            Log.d(TAG, "OnError: $it")
+                        },
+                        {
+                            Log.d(TAG, "OnComplete")
+                        }
+                )
 
-            override fun onError(e: Throwable?) {
-                Log.d(TAG, "onError: $e")
-            }
-
-            override fun onComplete() {
-                Log.d(TAG, "onComplete: ")
-            }
-        }
-
-        observable.subscribe(observer)
     }
 }
